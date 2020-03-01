@@ -1,7 +1,7 @@
-import traceback
 import cv2
-import numpy as np
 import math
+import traceback
+import numpy as np
 
 
 cap = cv2.VideoCapture(0)
@@ -19,12 +19,16 @@ while(True):
         # define region of interest
         roi = frame[100:300, 100:300]
 
-        cv2.rectangle(frame, (100, 100), (300, 300), (0, 255, 0), 0)    
+        cv2.rectangle(frame, (100, 100), (300, 300), (0, 255, 0), 0)
         hsv = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
 
         # define range of skin color in HSV
-        lower_skin = np.array([0, 20, 70], dtype=np.uint8)
-        upper_skin = np.array([20, 255, 255], dtype=np.uint8)
+        # lower_skin = np.array([0, 20, 70], dtype=np.uint8)
+        # upper_skin = np.array([20, 255, 255], dtype=np.uint8)
+
+        lower_skin = np.array([23, 0, 0], dtype=np.uint8)
+        upper_skin = np.array([255, 255, 162], dtype=np.uint8)
+
 
         # extract skin colur imagw
         mask = cv2.inRange(hsv, lower_skin, upper_skin)
@@ -37,8 +41,8 @@ while(True):
 
         # find contours
         contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-        print(contours)
-        print(hierarchy)
+        # print(contours)
+        # print(hierarchy)
         
         # find contour of max area(hand)
         cnt = max(contours, key=lambda x: cv2.contourArea(x))
