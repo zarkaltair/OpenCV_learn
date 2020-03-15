@@ -12,5 +12,7 @@ def viewImage(image, name_of_window):
 
 # rectangle on image
 output = img.copy()
+# non filled rectangle
 cv2.rectangle(output, (240, 250), (450, 100), (0, 255, 255), 2)
+# for filled rectangle need write -1
 viewImage(output, 'Rectangle on image')
