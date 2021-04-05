@@ -37,7 +37,7 @@ class HandDetector():
                 cx, cy, = int(lm.x * w), int(lm.y * h)
                 lm_list.append([id, cx, cy])
                 if draw:
-                    cv2.circle(img, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
+                    cv2.circle(img, (cx, cy), 7, (255, 0, 0), cv2.FILLED)
 
         return lm_list
 
@@ -51,8 +51,8 @@ def main():
         seccess, img = cap.read()
         img = detector.find_hands(img)
         lm_list = detector.find_position(img)
-        if len(lm_list) != 0:
-            print(lm_list[4])
+        # if len(lm_list) != 0:
+            # print(lm_list[4])
 
         cTime = time.time()
         fps = 1 / (cTime - pTime)
